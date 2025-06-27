@@ -8,13 +8,7 @@ import math
 class LeNet5(nn.Module):
     
     def __init__(self, num_classes=33, input_channels=1):
-        """
-        Initialize LeNet-5 model
         
-        Args:
-            num_classes (int): Number of output classes (33 for Tifinagh)
-            input_channels (int): Number of input channels (1 for grayscale)
-        """
         super(LeNet5, self).__init__()
         
         self.num_classes = num_classes
@@ -66,15 +60,7 @@ class LeNet5(nn.Module):
         self._initialize_weights()
         
     def forward(self, x):
-        """
-        Forward pass through the network
         
-        Args:
-            x (torch.Tensor): Input tensor of shape (batch_size, channels, height, width)
-            
-        Returns:
-            torch.Tensor: Output logits of shape (batch_size, num_classes)
-        """
         # Validate input dimensions
         if x.dim() != 4:
             raise ValueError(f"Expected 4D input tensor, got {x.dim()}D")
@@ -139,16 +125,7 @@ class LeNet5(nn.Module):
                     nn.init.zeros_(module.bias)
     
     def get_feature_maps(self, x, layer_name='conv1'):
-        """
-        Extract feature maps from intermediate layers for visualization
         
-        Args:
-            x (torch.Tensor): Input tensor
-            layer_name (str): Layer name ('conv1', 'conv2', 'pool1', 'pool2')
-            
-        Returns:
-            torch.Tensor: Feature maps from specified layer
-        """
         if layer_name == 'conv1':
             return F.relu(self.conv1(x))
         elif layer_name == 'pool1':
@@ -167,15 +144,7 @@ class LeNet5(nn.Module):
             raise ValueError(f"Unknown layer name: {layer_name}")
     
     def get_conv_filters(self, layer_name='conv1'):
-        """
-        Get convolutional filter weights for visualization
         
-        Args:
-            layer_name (str): Layer name ('conv1' or 'conv2')
-            
-        Returns:
-            torch.Tensor: Filter weights
-        """
         if layer_name == 'conv1':
             return self.conv1.weight.data  # Shape: (6, 1, 5, 5)
         elif layer_name == 'conv2':
@@ -184,21 +153,11 @@ class LeNet5(nn.Module):
             raise ValueError(f"Unknown layer name: {layer_name}")
     
     def count_parameters(self):
-        """
-        Count the total number of trainable parameters
         
-        Returns:
-            int: Total number of parameters
-        """
         return sum(p.numel() for p in self.parameters() if p.requires_grad)
     
     def get_layer_info(self):
-        """
-        Get detailed information about each layer
-        
-        Returns:
-            dict: Layer information including parameters and output shapes
-        """
+       
         info = {
             'conv1': {
                 'type': 'Conv2d',
