@@ -6,20 +6,6 @@ import math
 
 
 class LeNet5(nn.Module):
-    """
-    LeNet-5 Convolutional Neural Network for Tifinagh Character Classification
-    
-    Architecture:
-    Input(32×32×1) → C1(6@28×28) → S2(6@14×14) → C3(16@10×10) → 
-    S4(16@5×5) → FC1(120) → FC2(84) → Output(33)
-    
-    Total Parameters: 63,661
-    - Conv1: 156 parameters (6 × (5×5×1 + 1))
-    - Conv2: 2,416 parameters (16 × (5×5×6 + 1))
-    - FC1: 48,120 parameters (400×120 + 120)
-    - FC2: 10,164 parameters (120×84 + 84)
-    - FC3: 2,805 parameters (84×33 + 33)
-    """
     
     def __init__(self, num_classes=33, input_channels=1):
         """
